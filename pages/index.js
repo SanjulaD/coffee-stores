@@ -3,13 +3,20 @@ import Image from 'next/image'
 import Banner from '../components/banner'
 import Card from '../components/card'
 import styles from '../styles/Home.module.css'
-import CoffeeStores from "../data/coffee-stores.json"
+import CoffeeStoresData from "../data/coffee-stores.json"
 
-export default function Home() {
+export async function getStaticProps(context) {
+  return {
+    props: {
+      CoffeeStores: CoffeeStoresData
+    },
+  }
+}
+
+export default function Home(props) {
   function handleOnClickButtonClick() {
 
   }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -31,7 +38,7 @@ export default function Home() {
         <h2 className={styles.heading2}>Stores near me</h2>
         <div className={styles.cardLayout}>
           {
-            CoffeeStores.map((coffee) => {
+            props.CoffeeStores.length > 0 && props.CoffeeStores.map((coffee) => {
               return (
                 <Card
                   key={coffee.id}
