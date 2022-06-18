@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Banner from '../components/banner'
+import Card from '../components/card'
 import styles from '../styles/Home.module.css'
+import CoffeeStores from "../data/coffee-stores.json"
 
 export default function Home() {
   function handleOnClickButtonClick() {
@@ -15,9 +17,8 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>Coffee Connoisseur</h1>
+        <Banner buttonText="View Stores Near By" handleOnClick={handleOnClickButtonClick} />
       </main>
-      <Banner buttonText="View Stores Near By" handleOnClick={handleOnClickButtonClick} />
       <div className={styles.heroImage}>
         <Image
           src="/static/hero-image.png"
@@ -25,6 +26,27 @@ export default function Home() {
           height={400}
           alt="hero image"
         />
+      </div>
+      <div className={styles.sectionWrapper}>
+        <h2 className={styles.heading2}>Stores near me</h2>
+        <div className={styles.cardLayout}>
+          {
+            CoffeeStores.map((coffee) => {
+              return (
+                <Card
+                  key={coffee.id}
+                  name={coffee.name}
+                  imgUrl={
+                    coffee.imgUrl ||
+                    "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+                  }
+                  href={`/coffee-store/${coffee.id}`}
+                  className={styles.card}
+                />
+              )
+            })
+          }
+        </div>
       </div>
     </div>
   )
