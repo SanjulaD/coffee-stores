@@ -6,6 +6,9 @@ import styles from '../styles/Home.module.css'
 import CoffeeStoresData from "../data/coffee-stores.json"
 
 export async function getStaticProps(context) {
+  fetch("https://api.foursquare.com/v2/venues/search?11=43.65267326999575,-79.39545615725015&query=coffeestores&client_id=X00XAXFEIOUKZUOUNFUZKKZZPK3VYU105DH1LOROJAC5D5A0&client_secret=AADM2KMGD3ZYSJ4J0VXXWIT54DFOWOONXZXVB4LZIDEEFNRW&v=20210525")
+    .then(response => response.json())
+    .then(data => console.log(data))
   return {
     props: {
       CoffeeStores: CoffeeStoresData

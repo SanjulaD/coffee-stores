@@ -8,7 +8,6 @@ import styles from './../../styles/coffee-store.module.css'
 
 export async function getStaticProps(staticProps) {
     const params = staticProps.params
-    console.log(params)
     return {
         props: {
             CoffeeStore: CoffeeStoresData.find((CoffeeStore) => {
